@@ -16,21 +16,18 @@
                 <div class="col-lg-2">
                         <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
                 </div>           
-                <div class="col-lg-8">
+                <div class="col-lg-10" style="display: flex; justify-content: flex-end ; align-items: center;">
                             <ul id="buttons">
                                 <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="">Sign Up</a></li>
-                                <li><a href="">Log In</a></li>
-                                <li><a href="">Profile</a></li>
+                                <li><a href="./signupforma.html">Sign Up</a></li>
+                                <li><a href="./login.html">Log In</a></li>
                             </ul>     
-                </div>
-                <div class="col-lg-2">
                 </div>
             </div>
         </div>
     </header>
 
-<div class="container" style="display: flex; justify-content: center; height: 500px; margin-top: 40px;">
+<div class="container" style="display: flex; justify-content: center; height: 600px; margin-top: 40px; max-width: 80%;">
    <div class="col-md-2  forma"><button type="button" onclick="displayPreviousImage()" class=" btn_prev_next">Previous</button></div>
     <div class="col-md-10">
         <img id="img" src="images/07.png" >
@@ -66,7 +63,10 @@
             images[7] = "images/breaking.png";
             images[8] = "images/07.png";
         </script>
-        <div class="container" id="top">
+
+
+
+        <div class="container" style="max-width: 80%; margin-top: 2%;">
             <div class="row" >
             <div class="col-xl-4">
                 <img src="images/cred3.png" alt="" class="img">
@@ -196,22 +196,26 @@
             </div>
          </div>
         </div>
-        <!-- <div class="permifooter">
-            <div class="previous">
-                <button class="btn_prev_next" style="background-color: rgb(34, 255, 244);">Previous</button>
-            </div>
-            <div class="NextPage">
-                <button class="btn_prev_next" style="background-color: rgb(34, 255, 244);">Next Page</button>
-            </div>
-        </div>
-    </main>-->
-    <footer>
-      
-        <div class="col-lg-2">
-            <a href="./index.html"><img src="images/logo.png" alt="" id="logo"></a>
-        </div>  
+    
 
-    </footer>
-
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                            <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
+                    </div>
+                    <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
+                            <ul id="buttons">
+                                <li><a href="./index.html">Homepage</a></li>
+                                <li><a href="./signupforma.html">Sign Up</a></li>
+                                <li><a href="./login.html">Log In</a></li>
+                            </ul>
+                    </div>
+                    <div class="col-lg-3" style="display: flex; align-items: center; justify-content: center;">
+                        <p style="margin: 0;">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    </div>
+                  </div>
+              </div>
+          </footer>
 </body>
 </html>
