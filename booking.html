@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myCinema</title>
     <link rel="shortcut icon" href="images/video1.png"/>
 
@@ -42,8 +41,7 @@
                     <p>Choose the date, time and number of seats</p>
               </div>
               <div class="col-md-6">
-                <input class="form-control nr" type="number" name="s_numbers" placeholder="Number of seats" min="1">
-
+                <input class="form-control nr" type="number" name="s_numbers" placeholder="Number of seats" min="1" id="seatNr">
               </div>
 
       <div class="rresht">
@@ -86,30 +84,35 @@
 
 
   </div>
+  <div class="rresht">
+    <h5><span>Price for one seat:</span> 4.80€</h5>
+    <h5 id="result">Total :</h5>
+  </div>
 
 
     <div class="row-lg-12">
-        <button class="submit-btn" type="submit" name="submit" >Book Now</button>
+        <button class="submit-btn" type="submit" name="submit" onclick="calculateAndDisplay() ">Book Now</button>
     </div>
   
 </div>
 
 
-<div class="b2">
-  <div class="form-label">
-      <select class="b1" name="price" placeholder="Price">
-          <option value="" disabled selected hidden>Price</option>
-          <option value="08.00">$08.00</option>
-          <option value="10.50">$10.50</option>
-          <option value="12.00">$12.00</option>
-          <option value="15.00">$15.00</option>
-          <option value="20.00">$20.00</option>
-      </select>
-  </div>
-</div>
 
 
-<footer class="footer">
+<script>
+  function calculateAndDisplay() {
+      // Merr vlerën nga input-i
+      var inputValue = document.getElementById("seatNr").value;
+
+      // Kryej kalkulimin (p.sh., shto 5)
+      var result = parseFloat(inputValue) * 4.8;
+
+      // Shfaq rezultatin në elementin me id "result"
+      document.getElementById("result").innerText = "Total : " + result + "€";
+  }
+</script>
+
+<footer class="footer1">
   <div class="container">
       <div class="row">
           <div class="col-lg-3">
