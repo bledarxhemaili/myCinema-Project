@@ -1,3 +1,13 @@
+<?php
+
+    // session_start();
+
+    $movie_id = $_GET['id'];
+
+    $_SESSION['movie_id'] = $movie_id;
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,43 +32,60 @@ html, body{
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">
-                        <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
+                        <a href="./index.php"><img src="images/logo.png" alt="" class="logo"></a>
                 </div>           
                 <div class="col-lg-10" style="display: flex; justify-content: flex-end ; align-items: center;">
                             <ul id="buttons">
-                                <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="./signupforma.html">Sign Up</a></li>
-                                <li><a href="./login.html">Log In</a></li>
+                                <li><a href="./index.php">Homepage</a></li>
+                                <li><a href="./signupforma.php">Sign Up</a></li>
+                                <li><a href="./login.php">Log In</a></li>
                             </ul>     
                 </div>
             </div>
         </div>
     </header>
+
+
 <div id="divi">
     <div class="container" >
+
+    <?php
+        include_once('config.php');
+        $id = $_GET['id'];
+
+        $sql = "SELECT * FROM movies WHERE id=:id";
+        $prep = $conn->prepare($sql);
+        $prep->bindParam(':id', $id);
+        $prep->execute();
+        $date = $prep->fetchAll();
+        ?>
+
+                      <?php foreach ($date as $data) {?>
         <div class="col-lg-12">
-            <h2 id="titulli">Meg 2: The Trench</h2>
+            <h2 id="titulli"><?php echo $data['name']; ?></h2>
 
         </div>
       <div class="row" style="display: flex; justify-content: center; align-items: center;">
         <div class="col-lg-2">
             <ol>
-                <li><span>Type:</span> Thriller</li>
-                <li><span>Quality:</span> UHD</li>
-                <li><span>Views:</span> 5067</li>
-                <li><span>Price:</span> 4.80€</li>
+                <li><span>Category: </span><?php echo $data['category']; ?></li>
+                <li><span>Quality: </span> UHD</li>
+                <li><span>Views: </span><?php echo(rand(100,9999)); ?></li>
+                <li><span>Price: </span> 4.80€</li>
             </ol>
         </div>
         <div class="col-lg-6">
-            <p>
-                Meg 2: The Trench is a 2023 science fiction action film directed by Ben Wheatley from a screenplay by Jon Hoeber, Erich Hoeber, and Dean Georgaris, based on the 1999 novel The Trench by Steve Alten. It serves as the sequel to The Meg (2018). The film stars Jason Statham, Wu Jing, Sophia Cai, Page Kennedy, Sergio Peris-Mencheta, Skyler Samuels and Cliff Curtis. Like the previous film, it follows a group of scientists who must outrun and outswim the titular megalodons when a malevolent mining operation threatens their mission and forces them into a high-stakes battle for survival.
-            </p>
+            <p><?php echo $data['pershkrimi']; ?></p>
         </div>
        
         <div class="col-lg-4">
-            <img src="images/meg2.png" alt="" style="width: 100%;">
+            <img src="images/<?php echo $data['image']; ?>" alt="" style="width: 100%;">
         </div>
       </div>
+
+    
+      <?php } ?>
+
     </div>
 </div>
 

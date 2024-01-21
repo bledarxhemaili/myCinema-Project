@@ -26,13 +26,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">
-                        <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
+                        <a href="./index.php"><img src="images/logo.png" alt="" class="logo"></a>
                 </div>           
                 <div class="col-lg-10" style="display: flex; justify-content: flex-end ; align-items: center;">
                             <ul id="buttons">
-                                <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="./signupforma.html">Sign Up</a></li>
-                                <li><a href="./login.html">Log In</a></li>
+                                <li><a href="./index.php">Homepage</a></li>
+                                <li><a href="./signupforma.php">Sign Up</a></li>
+                                <li><a href="./login.php">Log In</a></li>
                             </ul>     
                 </div>
             </div>
