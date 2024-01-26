@@ -45,7 +45,7 @@
                 <div class="login-container" style="width: 350px;">
                     <h2>Sign Up</h2>
                     <p style="color: black;">Welcome to the official myCinema website.</p>
-                <form id="">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                     <div class="form-group">
                         <input type="text" name="firstname" id="firstname" placeholder="First name" required>
                     </div>
@@ -68,11 +68,12 @@
                     <button type="submit" name="submit"  id="button" >Register Now</button>
                 </div>
                 </form>
+                
             </div>
             </div>  
         </div>
     </section>
-
+    <?php include_once 'controller/registerController.php';?>
 
     <script>
         function validateForm() {

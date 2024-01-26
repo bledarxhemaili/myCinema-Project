@@ -33,7 +33,41 @@ class UserRepository{
 
     }
 
-  
+    function loginUser($username, $password){
+
+        $conn = $this->connection;
+        
+        $sql = "SELECT id, username, password, admin FROM login WHERE username =:username";
+        $prep = $conn->prepare($sql);
+        $prep->bindParam(":username", $username);
+        $prep->execute();
+        $data = $prep->fetch();
+
+
+            if($data == false){
+                echo "<script>alert('Username incorrect!')</script>";
+                 echo "<script>location.href='login.php'</script>";
+            }else if(password_verify($password, $data['password'])){
+                session_start();
+                $_SESSION['user_id'] = $data['id'];
+                $_SESSION['username'] = $data['username'];
+                $_SESSION['password'] = $data['password']; 
+                $_SESSION['admin'] = $data['admin'];
+                header("Location: index.php");
+            }else{
+                echo "<script>alert('Password incorrect!')</script>";
+                 echo "<script>location.href='login.php'</script>";
+            }
+
+        if ($username == $username && $password == $password) { 
+        $_SESSION['authenticated'] = true;
+        header("Location: index.php");
+        }
+
+
+        return $data;
+
+    }
 
     function getAllUsers(){
         $conn = $this->connection;
@@ -57,7 +91,7 @@ class UserRepository{
         return $user;
     }
 
-    function updateUser($id,$name,$surname,$email,$username,$password){
+    function updateUser($id, $firstname, $lastname, $username, $email, $number, $password, $admin){
          $conn = $this->connection;
 
          $sql = "UPDATE login SET firstname=?, lastname=?, username=?, email=?, number=?, password=?, admin=?, WHERE id=?";

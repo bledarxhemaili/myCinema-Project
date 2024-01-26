@@ -1,3 +1,10 @@
+<?php
+
+    // session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +39,7 @@
     <div class="login-container">
         <h2>Log In</h2>
         <p style="color: black;">Welcome to the official myCinema website.</p>
-        <form id="loginForm">
+        <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="login">
             <div class="form-group">
                 <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
@@ -45,6 +52,9 @@
         </form>
     </div>
 </div>
+
+<?php include_once 'controller/signupController.php';?>
+
 </div>
      <script>
         function validateForm() {
