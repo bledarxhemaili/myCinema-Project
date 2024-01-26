@@ -10,15 +10,11 @@ if(isset($_POST['submit'])){
     }else{
         $username = $_POST['username'];
         $password = $_POST['password'];
-        
-               
 
         $userRepository = new UserRepository();
         $userRepository->loginUser($username, $password);
 
-
     }
 }
-
 
 ?>
