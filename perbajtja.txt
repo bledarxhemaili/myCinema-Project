@@ -1,6 +1,0 @@
-homepage +
-login
-sign up
-detajet e filmit
-biletat   +
-

@@ -1,32 +1,14 @@
 <?php
-// include_once 'repository/userRepository.php';
+
     session_start();
 
     $movie_id = $_GET['id'];
 
-    // $user_id = $_POST['id'];
-
-    // $username = $_POST['username'];
-    // Retrieve values from the session
-    // $user_id = $_SESSION['user_id'];
-    // $username = $_SESSION['username'];
-
-
     $user_id = $_SESSION['user_id'];
     $username = $_SESSION['username'];
-    // $user_id = isset($_GET['id']) ? $_GET['id'] : null;
-    // $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
-    // $username = isset($_GET['username']) ? $_GET['username'] : null;
-
-
-    // $_SESSION['user_id'] = $_GET['id'];
-
-    // $_SESSION['username'] = $_GET['username'];
 
     $_SESSION['movie_id'] = $movie_id;
 
-    
-    // $movie_id = $_POST['movie_id'];
 
     $id = $_GET['id'];
  ?>
@@ -47,45 +29,7 @@
 } */
 
 
-.review-section {
-    /* background-color: #333; */
-    /* color: white; */
-    padding: 20px;
-}
 
-.reviews, .your-comment {
-    margin-bottom: 20px;
-}
-
-.username {
-   font-weight: bold; 
-}
-
-textarea {
-   width: calc(100% - 20px);
-   height: 80px;
-   margin-bottom: 10px; 
-}
-
-button {
-   background-color: red; 
-   color:white; 
-   border:none; 
-   padding:10px 20px; 
-}
-
-.booki{
-    display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.watch-btn{
-  background-color: red;
-  color: white;
-  padding: 15px 25px;
-  text-decoration: none;
-}
     </style>
 </head>
 <body>
@@ -115,13 +59,11 @@ button {
    
     include_once 'repository/movieRepository.php';
 
-
-
     $movieRepository = new MovieRepository();
 
     $movies = $movieRepository->getMovieById($id);
 
-echo "<div class='container' >";
+echo "<div class='container'  style='margin-top: 5%;'>";
 
 foreach ($movies as $movie) {
 
@@ -135,7 +77,7 @@ echo "<div class='col-lg-12'>
                     <li><span>Category: </span>{$movie['category']}</li>
                     <li><span>Quality: </span>UHD</li>
                     <li><span>Views: </span>" . rand(100, 9999) . "</li>
-                    <li><span>Price: </span>4.80€</li>
+                    <li><span>Price: </span>{$movie['qmimi']} €</li>
                 </ol>
             </div>
         <div class='col-lg-4'>

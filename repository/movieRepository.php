@@ -18,16 +18,19 @@ class MovieRepository{
         $pershkrimi = $movie->getPershkrimi();
         $category = $movie->getCategory();
         $image = $movie->getImage();
+        $qmimi = $movie->getQmimi();
 
 
 
-        $sql = "INSERT INTO movies (name, pershkrimi, category, image) VALUES (?,?,?,?)";
+
+        $sql = "INSERT INTO movies (name, pershkrimi, category, image, qmimi) VALUES (?,?,?,?,?)";
 
         $statement = $conn->prepare($sql);
 
-        $statement->execute([$name, $pershkrimi, $category, $image]);
+        $statement->execute([$name, $pershkrimi, $category, $image, $qmimi]);
 
         echo "<script> alert('Movies has been inserted successfuly!'); </script>";
+        header("Location: dashboard.php");
         
     }
 
@@ -57,14 +60,14 @@ class MovieRepository{
         return $movies;
     }
 
-    function updateMovie($name, $pershkrimi, $category, $image){
+    function updateMovie($name, $pershkrimi, $category, $image, $qmimi){
          $conn = $this->connection;
 
-         $sql = "UPDATE movies SET name=?, pershkrimi=?, category=?, image=?";
+         $sql = "UPDATE movies SET name=?, pershkrimi=?, category=?, image=?, qmimi=?";
 
          $statement = $conn->prepare($sql);
 
-         $statement->execute([$name, $pershkrimi, $category, $image]);
+         $statement->execute([$name, $pershkrimi, $category, $image, $qmimi]);
 
          echo "<script>alert('update was successful'); </script>";
     } 

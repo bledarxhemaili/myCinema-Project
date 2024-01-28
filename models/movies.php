@@ -5,13 +5,17 @@ class Movie{
     private $pershkrimi;
     private $category;
     private $image;
+    private $qmimi;
 
 
-    function __construct($name, $pershkrimi, $category, $image){
+
+
+    function __construct($name, $pershkrimi, $category, $image, $qmimi){
             $this->name = $name;
             $this->pershkrimi = $pershkrimi;
             $this->category = $category;
             $this->image = $image;
+            $this->qmimi = $qmimi;
 
     }
 
@@ -27,6 +31,9 @@ class Movie{
     }
     function getImage(){
         return $this->image;
+    }
+    function getQmimi(){
+        return $this->qmimi;
     }
 
 }

@@ -329,3 +329,45 @@ display: flex;
 align-items: center;
 justify-content: center;
 } */
+
+
+
+.review-section {
+  /* background-color: #333; */
+  /* color: white; */
+  padding: 20px;
+}
+
+.reviews, .your-comment {
+  margin-bottom: 20px;
+}
+
+.username {
+ font-weight: bold; 
+}
+
+textarea {
+ width: calc(100% - 20px);
+ height: 80px;
+ margin-bottom: 10px; 
+}
+
+button {
+ background-color: red; 
+ color:white; 
+ border:none; 
+ padding:10px 20px; 
+}
+
+.booki{
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.watch-btn{
+background-color: red;
+color: white;
+padding: 15px 25px;
+text-decoration: none;
+}

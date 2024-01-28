@@ -1,3 +1,19 @@
+<?php
+
+      session_start();
+
+
+      $movie_id = $_GET['id'];
+
+      $user_id = $_SESSION['user_id'];
+
+      $_SESSION['movie_id'] = $movie_id;
+  
+      $id = $_GET['id'];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,14 +43,36 @@
     </div>
 </header>
 
+
+<?php
+
+   
+include_once 'repository/movieRepository.php';
+
+
+
+$movieRepository = new MovieRepository();
+
+$movies = $movieRepository->getMovieById($id);
+
+
+foreach ($movies as $movie) {
+  ?>
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 <div class="container"  style="display: flex; align-items: center; justify-content: center; margin-top: 5%;">
-  <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
-    <img src="images/cred3.png" alt="" style="width: 60%;">
+  <div class="row">
+    <div class="col-lg-12" style="display: flex; align-items: center; justify-content: center; ">
+      <h3><?= $movie["name"]; ?></h3>  
+    </div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
+      <img src="images/<?php echo $movie['image']; ?>" alt="Foto" style="width: 100%;">
+    </div>
   </div>
 
 </div>
 
-  <div class="container" id="booking">
+<div class="container" id="booking">
             
               <div class="col-lg-6 text-center" style="color: white; margin-top: 2%;">
                 <h2>Book your ticket</h2>
@@ -85,21 +123,31 @@
 
   </div>
   <div class="rresht">
-    <h5><span>Price for one seat:</span> 4.80€</h5>
-    <h5 id="result">Total :</h5>
+    <h5><span>Price for one seat: </span><?php echo $movie['qmimi']; ?> €</h5>
+    <!-- <h5 id="result">Total: </h5> -->
   </div>
-
+      <input type="hidden" value="<?php echo $movie_id ?>" name="movie_id" />
+      <input type="hidden" value="<?php echo $user_id ?>" name="user_id" />
+      <input type="hidden" value="<?php echo $movie['qmimi']; ?>" name="qmimi" />
 
     <div class="row-lg-12">
-        <button class="submit-btn" type="submit" name="submit" onclick="calculateAndDisplay() ">Book Now</button>
+        <button class="submit-btn" type="submit" name="submit" >Book Now</button>
     </div>
   
 </div>
 
 
+</form>
+  <?php
+}
+?>
+<?php include_once 'controller/bookingController.php';?>
+
+<!-- onclick="calculateAndDisplay() " -->
 
 
-<script>
+
+<!-- <script>
   function calculateAndDisplay() {
       // Merr vlerën nga input-i
       var inputValue = document.getElementById("seatNr").value;
@@ -110,7 +158,7 @@
       // Shfaq rezultatin në elementin me id "result"
       document.getElementById("result").innerText = "Total : " + result + "€";
   }
-</script>
+</script> -->
 
 <footer class="footer1">
   <div class="container">

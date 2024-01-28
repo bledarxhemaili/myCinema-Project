@@ -4,7 +4,7 @@ class DatabaseConenction{
     private $server="localhost";
     private $username="root";
     private $password="";
-    private $database = "mycinema";
+    private $database = "mycinema1";
 
 
     function startConnection(){
