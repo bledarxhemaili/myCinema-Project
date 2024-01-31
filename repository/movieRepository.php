@@ -60,17 +60,19 @@ class MovieRepository{
         return $movies;
     }
 
-    function updateMovie($name, $pershkrimi, $category, $image, $qmimi){
-         $conn = $this->connection;
 
-         $sql = "UPDATE movies SET name=?, pershkrimi=?, category=?, image=?, qmimi=?";
 
-         $statement = $conn->prepare($sql);
+    function updateMovie($id, $name, $pershkrimi, $category, $image, $qmimi) {
+        $conn = $this->connection;
 
-         $statement->execute([$name, $pershkrimi, $category, $image, $qmimi]);
+        $sql = "UPDATE movies SET name=?, pershkrimi=?, category=?, image=?, qmimi=? WHERE id=?";
+        $statement = $conn->prepare($sql);
 
-         echo "<script>alert('update was successful'); </script>";
-    } 
+        // Pass parameters in the correct order
+        $statement->execute([$name, $pershkrimi, $category, $image, $qmimi, $id]);
+
+        header("location:dashboard.php");
+    }
 
     function deleteMovie($id){
         $conn = $this->connection;
@@ -81,7 +83,7 @@ class MovieRepository{
 
         $statement->execute([$id]);
 
-        echo "<script>alert('delete was successful'); </script>";
+        header("location:dashboard.php");
    } 
 }
 

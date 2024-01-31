@@ -2,14 +2,6 @@
 session_start(); 
 include_once 'repository/userRepository.php';
 
-// $user_id = $_POST['id']; 
-// $username = $_POST['username']; 
-
-// $_SESSION['user_id'] = $user_id;
-// $_SESSION['username'] = $username;
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,8 +47,6 @@ include_once 'repository/userRepository.php';
    <div class="col-md-2  forma"><button type="button" onclick="displayPreviousImage()" class=" btn_prev_next">Previous</button></div>
     <div class="col-md-10">
         <img id="img" src="images/07.png" >
-        <!-- <button type="button" onclick="displayPreviousImage()">Previous</button>
-        <button type="button" onclick="displayNextImage()">Next</button> -->
     </div>
     <div class="col-md-2 forma"><button type="button" onclick="displayNextImage()" class=" btn_prev_next">Next</button></div>
 

@@ -49,12 +49,14 @@ class BookingRepository{
     function getBookingById($id){
         $conn = $this->connection;
 
-        $sql = "SELECT * FROM booking WHERE id='$id'";
+        $sql = "SELECT * FROM booking WHERE id=:id";
+        $statement = $conn->prepare($sql);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $bookings = $statement->fetchAll();
 
-        $statement = $conn->query($sql);
-        $booking = $statement->fetch();
+        return $bookings;
 
-        return $booking;
     }
 
     function updateBooking($id, $movie_id, $user_id, $s_numbers, $date, $time , $totali){
@@ -64,9 +66,9 @@ class BookingRepository{
 
          $statement = $conn->prepare($sql);
 
-         $statement->execute([$movie_id, $user_id, $s_numbers, $date, $time , $totali]);
+         $statement->execute([$movie_id, $user_id, $s_numbers, $date, $time , $totali, $id]);
 
-         echo "<script>alert('update was successful'); </script>";
+         header("Location: dashboard.php");
     } 
 
     function deleteBooking($id){
@@ -78,7 +80,7 @@ class BookingRepository{
 
         $statement->execute([$id]);
 
-        echo "<script>alert('delete was successful'); </script>";
+        header("Location: dashboard.php");
    } 
 }
 

@@ -29,7 +29,7 @@ class UserRepository{
 
         $statement->execute([$firstname, $lastname, $username, $email, $number , $password, $admin]);
 
-        echo "<script> alert('User has been inserted successfuly!'); </script>";
+        header("Location: index.php");
 
     }
 
@@ -83,26 +83,27 @@ class UserRepository{
     function getUserById($id){
         $conn = $this->connection;
 
-        $sql = "SELECT * FROM login WHERE id='$id'";
+        $sql = "SELECT * FROM login WHERE id=:id";
+        $statement = $conn->prepare($sql);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $users = $statement->fetchAll();
 
-        $statement = $conn->query($sql);
-        $user = $statement->fetch();
-
-        return $user;
+        return $users;
     }
 
     function updateUser($id, $firstname, $lastname, $username, $email, $number, $password, $admin){
          $conn = $this->connection;
 
-         $sql = "UPDATE login SET firstname=?, lastname=?, username=?, email=?, number=?, password=?, admin=?, WHERE id=?";
+         $sql = "UPDATE login SET firstname=?, lastname=?, username=?, email=?, number=?, password=?, admin=? WHERE id=?";
 
          $statement = $conn->prepare($sql);
 
-         $statement->execute([$firstname, $lastname, $username, $email, $number , $password, $admin]);
+         $statement->execute([$firstname, $lastname, $username, $email, $number , $password, $admin, $id]);
 
-         echo "<script>alert('update was successful'); </script>";
+         header("location:dashboard.php");
     } 
-
+    
     function deleteUser($id){
         $conn = $this->connection;
 
@@ -112,7 +113,7 @@ class UserRepository{
 
         $statement->execute([$id]);
 
-        echo "<script>alert('delete was successful'); </script>";
+        header("location:dashboard.php");
    } 
 }
 

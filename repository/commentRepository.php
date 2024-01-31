@@ -28,21 +28,6 @@ class CommentRepository{
         $statement->execute([$movie_id, $user_id, $username, $review]);
 
         header("Location: details.php?id=$movie_id");
-    exit();
-
-        // $sql = "INSERT INTO comments(user_id, movie_id, username, review) VALUES (:user_id, :movie_id, :username, :review)";
-        // $newComment = $conn->prepare($sql);
-        // $newComment->bindParam(':user_id', $user_id);
-        // $newComment->bindParam(':movie_id', $movie_id);
-        // $newComment->bindParam(':user', $user);
-        // $newComment->bindParam(':review', $review);
-
-        // $newComment->execute();
-
-        // echo "<script> alert('Comment has been inserted successfuly!'); </script>";
-        // header("Location: details.php?id=$movie_id");
-
-        // return ("Location: details.php?id=$movie_id");
 
     }
 
@@ -58,15 +43,16 @@ class CommentRepository{
         return $comments;
     }
 
-    function getCommentById($comment_id){
+    function getCommentById($id){
         $conn = $this->connection;
 
-        $sql = "SELECT * FROM comments WHERE comment_id='$comment_id'";
+        $sql = "SELECT * FROM comments WHERE id=:id";
+        $statement = $conn->prepare($sql);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $comments = $statement->fetchAll();
 
-        $statement = $conn->query($sql);
-        $comment = $statement->fetch();
-
-        return $comment;
+        return $comments;
     }
 
 
@@ -84,28 +70,28 @@ class CommentRepository{
     }
 
 
-    function updateComment($comment_id, $user_id, $movie_id, $username, $review){
+    function updateComment($id, $user_id, $movie_id, $username, $review){
          $conn = $this->connection;
 
-         $sql = "UPDATE comments SET user_id=?, movie_id=?, username=?, review=? WHERE comment_id=?";
+         $sql = "UPDATE comments SET user_id=?, movie_id=?, username=?, review=? WHERE id=?";
 
          $statement = $conn->prepare($sql);
 
-         $statement->execute([$user_id, $movie_id, $username, $review]);
+         $statement->execute([$user_id, $movie_id, $username, $review, $id]);
 
-         echo "<script>alert('update was successful'); </script>";
+         header("Location: dashboard.php");
     } 
 
-    function deleteComment($comment_id){
+    function deleteComment($id){
         $conn = $this->connection;
 
-        $sql = "DELETE FROM comments WHERE comment_id=?";
+        $sql = "DELETE FROM comments WHERE id=?";
 
         $statement = $conn->prepare($sql);
 
-        $statement->execute([$comment_id]);
+        $statement->execute([$id]);
 
-        echo "<script>alert('delete was successful'); </script>";
+        header("Location: dashboard.php");
    } 
 }
 

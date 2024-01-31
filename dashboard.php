@@ -1,27 +1,46 @@
 <?php
 
-
 	session_start();
-
-
 
  ?>
 
  <!DOCTYPE html>
  <html>
  <head>
- 	<title>Dashboard</title>
- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
- 	<link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-	  <link rel="shortcut icon" type="image/x-icon" href="images/video1.png" />
+    <title>myCinema</title>
+    <link rel="shortcut icon" href="images/video1.png"/>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
  	<style>
-
+    body{
+      background-color: white;
+    }
  		#sidebarMenu a {
  			color: white;
  		}
      #sidebarMenu {
  			min-height: 100%;
  		}
+
+     a:link, a:visited {
+      background-color:  #1ad1ff;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    a:hover, a:active {
+      background-color: #0099ff;
+    }
+    
+    html,body {
+      height: 100%;
+      margin: 0;
+    }
+
 
  	</style>
  </head>
@@ -43,8 +62,8 @@
 
 <div class="container-fluid" style="height: 100%;">
   <div class="row">
-    <nav style="background-color: #0b0c2a;" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" >
-      <div class="position-sticky pt-3" style="background-color: #0b0c2a;">
+    <nav style="background-color: #0b0c2a;  height: 100%;" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" >
+      <div class="position-sticky pt-3" style="background-color: #0b0c2a;  height: 100%;">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="index.php">Go to Homepage</a>
@@ -64,9 +83,7 @@
                   <li class=\"nav-item\">
                     <a class=\"nav-link\" onclick=\"showUsers()\">Users</a>
                   </li>
-                  <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"upload.php\">Insert a movie</a>
-                  </li>
+
                 ";
             }
           ?>
@@ -111,102 +128,75 @@
 </script>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-      <h2>Bookings</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+  <?php
+   if ($_SESSION['admin'] == 'false') {
+    echo "
+      <div class='table-responsive' id='bookingDiv'  style='display:none;'>
+       <h2>Bookings</h2>
+        <table class='table table-striped table-sm'>
           <thead>
             <tr>
-            <?php
-               if ($_SESSION['admin'] == 'true') {
-
-                echo "<th scope='col'>Book Id</th>";
-                }
-              ?>
-              <th scope="col">Movie Name</th>
-              <th scope="col">User</th>
-              <th scope="col">Number of tickets</th>
-              <th scope="col">Date</th>
-              <th scope="col">Time</th>
-              <th scope="col">Totali</th>
+              <th scope='col'>Movie Name</th>
+              <th scope='col'>User</th>
+              <th scope='col'>Number of tickets</th>
+              <th scope='col'>Date</th>
+              <th scope='col'>Time</th>
+              <th scope='col'>Totali</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody>";
 
-          <?php  
-            include_once 'repository/dashboardRepository.php';
+    include_once 'repository/dashboardRepository.php';
 
+    $dashboardRepository = new DashboardRepository();
+    $datas = $dashboardRepository->getData();
 
-            $dashboardRepository = new DashboardRepository();
-
-            $datas = $dashboardRepository->getData();
-          
-          foreach ($datas as $data) {   ?>
+    foreach ($datas as $data) {
+        echo "
             <tr>
-              <?php
-                if ($_SESSION['admin'] == 'true') {
-                  echo "<td>{$data['id']}</td>";
-                }
-              ?>
-              <td><?php echo $data['name']; ?></td>
-              <td><?php echo $data['username']; ?></td>
-              <td><?php echo $data['s_numbers']; ?></td>
-              <td><?php echo $data['date']; ?></td>
-              <td><?php echo $data['time']; ?></td>
-              <td><?php echo $data['totali']; ?> €</td>
-            </tr>
+              <td>{$data['name']}</td>
+              <td>{$data['username']}</td>
+              <td>{$data['s_numbers']}</td>
+              <td>{$data['date']}</td>
+              <td>{$data['time']}</td>
+              <td>{$data['totali']} €</td>
+            </tr>";
+    }
 
-             <?php  }  ?>
-
+    echo "
           </tbody>
         </table>
       </div>
+			
+      <div class='table-responsive'  id='commentDiv'  style='display:none;'>
+       <h2>Comments</h2>
+        <table class='table table-striped table-sm'>
+          <thead>
+            <tr>
+              <th scope='col'>Movie Name</th>
+              <th scope='col'>Review</th>
+            </tr>
+          </thead>
+          <tbody>";
+
+    $comments = $dashboardRepository->getComments();
+
+    foreach ($comments as $comment) {
+        echo "
+            <tr>
+              <td>{$comment['name']}</td>
+              <td>{$comment['review']}</td>
+            </tr>";
+    }
+
+    echo "
+          </tbody>
+        </table>
+      </div>";
+ }
+?>
 
 
-
-			<h2>Comments</h2>
-			<div class="table-responsive">
-				<table class="table table-striped table-sm">
-					<thead>
-						<tr>
-            <?php
-               if ($_SESSION['admin'] == 'true') {
-
-                echo "<th scope='col'>Comment Id</th>";
-                echo "<th scope='col'>User</th>";
-                echo "<th scope='col'>Movie Id</th>";
-                }
-              ?>
-							<th scope="col">Movie Name</th>
-							<th scope="col">Review</th>
-						</tr>
-					</thead>
-					<tbody>
-
-					<?php 
-            include_once 'repository/dashboardRepository.php';
-
-            $dashboardRepository = new DashboardRepository();
-
-            $comments = $dashboardRepository->getComments();
-          
-          foreach ($comments as $comment) {   ?>
-						<tr>
-              <?php
-                if ($_SESSION['admin'] == 'true') {
-                  echo "<td>{$comment['id']}</td>";
-                  echo "<td>{$comment['username']}</td>";
-                  echo "<td>{$comment['movie_id']}</td>";
-                }
-              ?>
-							<td><?php echo $comment['name']; ?></td>
-							<td><?php echo $comment['review']; ?></td>
-						</tr>
-
-						 <?php  }  ?>
-
-					</tbody>
-				</table>
-			</div>
 
 
 <?php
@@ -227,7 +217,8 @@ if ($_SESSION['admin'] == 'true') {
           <th scope=\"col\">Date</th>
           <th scope=\"col\">Time</th>
           <th scope=\"col\">Totali</th>
-
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>";
@@ -247,12 +238,15 @@ if ($_SESSION['admin'] == 'true') {
             <td>{$booking['date']}</td>
             <td>{$booking['time']}</td>
             <td>{$booking['totali']}</td>
+            <td><a href='editBooking.php?id=$booking[id]'>Edit</a> </td>
+            <td><a href='deleteBooking.php?id=$booking[id]'>Delete</a></td>
           </tr>";
   }
 
   echo "
         </tbody>
       </table>
+      <a href='insertBooking.php'>Shto Rezervim</a>
     </div>
     ";
 
@@ -270,6 +264,8 @@ if ($_SESSION['admin'] == 'true') {
              <th scope=\"col\">User_id</th>
              <th scope=\"col\">Username</th>
              <th scope=\"col\">Review</th>
+             <th>Edit</th>
+             <th>Delete</th>
            </tr>
          </thead>
          <tbody>";
@@ -287,12 +283,15 @@ if ($_SESSION['admin'] == 'true') {
              <td>{$comment['user_id']}</td>
              <td>{$comment['username']}</td>
              <td>{$comment['review']}</td>
+             <td><a href='editComment.php?id=$comment[id]'>Edit</a> </td>
+             <td><a href='deleteComment.php?id=$comment[id]'>Delete</a></td>
            </tr>";
    }
 
    echo "
          </tbody>
        </table>
+       <a href='insertComment.php'>Shto Komente</a>
      </div>
      ";
 
@@ -312,10 +311,11 @@ if ($_SESSION['admin'] == 'true') {
               <th scope=\"col\">Category</th>
               <th scope=\"col\">Image</th>
               <th scope=\"col\">Price</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>";
-
     include_once 'repository/movieRepository.php';
 
     $movieRepository = new MovieRepository();
@@ -330,12 +330,15 @@ if ($_SESSION['admin'] == 'true') {
               <td>{$movie['category']}</td>
               <td>{$movie['image']}</td>
               <td>{$movie['qmimi']} €</td>
+              <td><a href='editMovie.php?id=$movie[id]'>Edit</a> </td>
+              <td><a href='deleteMovie.php?id=$movie[id]'>Delete</a></td>
             </tr>";
     }
 
     echo "
           </tbody>
         </table>
+        <a href='insertMovie.php'>Shto Film</a>
       </div>
       ";
 
@@ -355,7 +358,8 @@ if ($_SESSION['admin'] == 'true') {
               <th scope=\"col\">Number</th>
               <th scope=\"col\">Password</th>
               <th scope=\"col\">Admin</th>
-
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>";
@@ -376,12 +380,15 @@ if ($_SESSION['admin'] == 'true') {
               <td>{$user['number']}</td>
               <td>{$user['password']}</td>
               <td>{$user['admin']}</td>
+              <td><a href='editUser.php?id=$user[id]'>Edit</a></td>
+              <td><a href='deleteUser.php?id=$user[id]'>Delete</a></td>
             </tr>";
     }
 
     echo "
           </tbody>
         </table>
+          <a href='inseerUser.php'>Shto User</a>
       </div>
       ";
 
