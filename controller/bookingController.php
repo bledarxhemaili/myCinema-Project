@@ -24,13 +24,6 @@ if(isset($_POST['submit'])){
     }
 
 
-// echo $_POST['movie_id'] . "<br>";
-// echo $_POST['user_id'] . "<br>";
-// echo $_POST['s_numbers'] . "<br>";
-// echo $_POST['date'] . "<br>";
-// echo $_POST['time'] . "<br>";
-// echo $_POST['qmimi'] . "<br>";
-
 }
 
 ?>

@@ -16,7 +16,27 @@
 
     <style>
         #forma{
-            margin-top: 10%;
+            margin-top: 8%;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+            align-content: center;
+        }
+
+        .form-group label {
+            display: flex;
+            flex: 1;
+            margin: 0;
+            color: white;
+            align-items: center;
+            
+        }
+
+        .form-group input {
+            flex: 2;
         }
     </style>
 </head>
@@ -31,16 +51,42 @@
             <div class="col-lg-12 " style="display: flex; justify-content: center; align-items: center; align-content: center;">
             
                 <form method="POST" action="" id="forma">             
-                    <h1>Forma per ndryshimin e rezervimeve ne databaz</h1>
+                    <h1>Forma per ndryshimin e userit ne databaz</h1>
 
-                    <input type="text" name="id" value="<?=$user['id']?>" readonly> <br> <br>
-                    <input type="text" name="firstname" value="<?=$user['firstname']?>" ><br><br>
-                    <input type="text" name="lastname" value="<?=$user['lastname']?>" ><br><br>
-                    <input type="text" name="username" value="<?=$user['username']?>" ><br><br>
-                    <input type="text" name="email" value="<?=$user['email']?>"><br><br>
-                    <input type="number" name="number" value="<?=$user['number']?>"><br><br>
-                    <input type="text" name="password" value="<?=$user['password']?>"><br><br>
-                    <input type="text" name="admin" value="<?=$user['admin']?>"><br><br>
+                    <div class="form-group">
+                        <label for="id">ID: </label>
+                        <input type="text" name="id" value="<?=$user['id']?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Firstname: </label>
+                        <input type="text" name="firstname" value="<?=$user['firstname']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname: </label>
+                        <input type="text" name="lastname" value="<?=$user['lastname']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        <input type="text" name="username" value="<?=$user['username']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" value="<?=$user['email']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Number: </label>
+                        <input type="number" name="number" value="<?=$user['number']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input type="text" name="password" value="<?=$user['password']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin">Admin: </label>
+                        <input type="text" name="admin" value="<?=$user['admin']?>">
+                    </div>
+
+                    <br>
 
                     <button type="submit" name="submit" class="watch-btn">Ruaj</button>
                 </form>

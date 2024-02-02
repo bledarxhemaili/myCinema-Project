@@ -1,9 +1,9 @@
 <?php
     $id = $_GET['id'];
 
-    include_once 'repository/bookingRepository.php';
+    include_once 'repository/paymentRepository.php';
 
-    $bookingRepository = new BookingRepository();
+    $paymentRepository = new PaymentRepository();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +16,8 @@
 
     <style>
         #forma{
-            margin-top: 10%;
+            margin-top: 8%;
         }
-        
         .form-group {
             display: flex;
             justify-content: space-between;
@@ -33,7 +32,7 @@
             margin: 0;
             color: white;
             align-items: center;
-            width: 270px;
+            width: 300px;
             
         }
 
@@ -47,43 +46,47 @@
     <div class="container" >
         <div class="row">
             <?php
-                $bookings = $bookingRepository->getBookingById($id);
-                foreach ($bookings as $booking) {
+                $payments = $paymentRepository->getPaymentById($id);
+                foreach ($payments as $payment) {
             ?>
             <div class="col-lg-12 " style="display: flex; justify-content: center; align-items: center; align-content: center;">
             
                 <form method="POST" action="" id="forma">             
-                    <h1>Forma per ndryshimin e rezervimeve ne databaz</h1>
+                    <h1>Forma per ndryshimin e pageses ne databaz</h1>
 
                     <div class="form-group">
                         <label for="id">ID: </label>
-                        <input type="text" name="id" value="<?=$booking['id']?>" readonly>
+                        <input type="number" name="id" value="<?=$payment['id']?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="movie_id">Movie id:</label>
-                        <input type="number" name="movie_id" value="<?=$booking['movie_id']?>">
+                        <label for="booking_id">Booking id: </label>
+                        <input type="number" name="booking_id" value="<?=$payment['booking_id']?>">
                     </div>
                     <div class="form-group">
-                        <label for="user_id">User id: </label>
-                        <input type="number" name="user_id" value="<?=$booking['user_id']?>">
+                        <label for="shuma">Shuma: </label>
+                        <input type="number" name="shuma" value="<?=$payment['shuma']?>">
                     </div>
                     <div class="form-group">
-                        <label for="s_numbers">Number of tickets:</label>
-                        <input type="number" name="s_numbers" value="<?=$booking['s_numbers']?>">
+                        <label for="cardNumber">Card number: </label>
+                        <input type="number" name="cardNumber" value="<?=$payment['cardNumber']?>">
                     </div>
                     <div class="form-group">
-                        <label for="date">Date:</label> 
-                        <input type="text" name="date" value="<?=$booking['date']?>">
+                        <label for="cardExpiryMonth">Card expiry month: </label>
+                        <input type="number" name="cardExpiryMonth" value="<?=$payment['cardExpiryMonth']?>">
                     </div>
                     <div class="form-group">
-                       <label for="time">Time:</label>
-                       <input type="text" name="time" value="<?=$booking['time']?>">
+                        <label for="cardExpiryYear">Card expiry year: </label>
+                        <input type="number" name="cardExpiryYear" value="<?=$payment['cardExpiryYear']?>">
                     </div>
                     <div class="form-group">
-                        <label for="totali">Totali:</label>
-                        <input type="text" name="totali" value="<?=$booking['totali']?>">
+                        <label for="cardCVC">Card CVC: </label>
+                        <input type="number" name="cardCVC" value="<?=$payment['cardCVC']?>">
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="cardPlaceholder">Card Placeholder: </label>
+                        <input type="text" name="cardPlaceholder" value="<?=$payment['cardPlaceholder']?>">
+                    </div>
+
                     <br>
 
                     <button type="submit" name="submit" class="watch-btn">Ruaj</button>
@@ -99,13 +102,15 @@
     <?php 
         if (isset($_POST['submit'])) {
             $id = $_POST['id'];
-            $movie_id = $_POST['movie_id'];
-            $user_id = $_POST['user_id'];
-            $s_numbers = $_POST['s_numbers'];
-            $date = $_POST['date'];
-            $time = $_POST['time'];
-            $totali = $_POST['totali'];
-            $bookingRepository->updateBooking($id, $movie_id, $user_id, $s_numbers, $date, $time , $totali);
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $number = $_POST['number'];
+            $password = $_POST['password'];
+            $admin = $_POST['admin'];
+
+            $userRepository->updateUser($id, $firstname, $lastname, $username, $email, $number, $password, $admin);
         }
     ?>
     

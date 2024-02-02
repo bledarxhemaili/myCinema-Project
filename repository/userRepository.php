@@ -51,8 +51,11 @@ class UserRepository{
                 session_start();
                 $_SESSION['user_id'] = $data['id'];
                 $_SESSION['username'] = $data['username'];
-                $_SESSION['password'] = $data['password']; 
                 $_SESSION['admin'] = $data['admin'];
+
+                setcookie('username', $data['username'], time() + 86400, '/');
+                setcookie('user_id', $data['id'], time() + 86400, '/');
+                
                 header("Location: index.php");
             }else{
                 echo "<script>alert('Password incorrect!')</script>";

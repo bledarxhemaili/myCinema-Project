@@ -29,9 +29,9 @@ class BookingRepository{
 
         $statement->execute([$movie_id, $user_id, $s_numbers, $date, $time , $totali]);
 
-        echo "<script> alert('Booking has been inserted successfuly!'); </script>";
+        $booking_id = $conn->lastInsertId();
 
-        header("Location: dashboard.php");
+        header("Location: payment.php?id=$booking_id");
     }
 
 

@@ -9,12 +9,14 @@
  <head>
     <title>myCinema</title>
     <link rel="shortcut icon" href="images/video1.png"/>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
  	<style>
     body{
       background-color: white;
+      color: black;
     }
  		#sidebarMenu a {
  			color: white;
@@ -62,7 +64,7 @@
 
 <div class="container-fluid" style="height: 100%;">
   <div class="row">
-    <nav style="background-color: #0b0c2a;  height: 100%;" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" >
+    <nav style="background-color: #0b0c2a;  height: 100%;" id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block sidebar collapse" >
       <div class="position-sticky pt-3" style="background-color: #0b0c2a;  height: 100%;">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -78,11 +80,17 @@
             if ($_SESSION['admin'] == 'true') {
                 echo "
                   <li class=\"nav-item\">
+                    <a class=\"nav-link\" onclick=\"showPayments()\">Payments</a>
+                  </li>
+                  <li class=\"nav-item\">
                     <a class=\"nav-link\" onclick=\"showMovies()\">Movies</a>
                   </li>
                   <li class=\"nav-item\">
                     <a class=\"nav-link\" onclick=\"showUsers()\">Users</a>
                   </li>
+                  <li class=\"nav-item\">
+                  <a class=\"nav-link\" onclick=\"showContacts()\">Contacts</a>
+                </li>
 
                 ";
             }
@@ -108,6 +116,14 @@
       x.style.display = "none";
     }
   }
+  function showContacts() {
+    var x = document.getElementById("contactsDiv");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
   function showComments() {
     var x = document.getElementById("commentDiv");
     if (x.style.display === "none") {
@@ -118,6 +134,14 @@
   }
   function showBookings() {
     var x = document.getElementById("bookingDiv");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  function showPayments() {
+    var x = document.getElementById("paymentDiv");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -180,7 +204,6 @@
           <tbody>";
 
     $comments = $dashboardRepository->getComments();
-
     foreach ($comments as $comment) {
         echo "
             <tr>
@@ -237,7 +260,7 @@ if ($_SESSION['admin'] == 'true') {
             <td>{$booking['s_numbers']}</td>
             <td>{$booking['date']}</td>
             <td>{$booking['time']}</td>
-            <td>{$booking['totali']}</td>
+            <td>{$booking['totali']} €</td>
             <td><a href='editBooking.php?id=$booking[id]'>Edit</a> </td>
             <td><a href='deleteBooking.php?id=$booking[id]'>Delete</a></td>
           </tr>";
@@ -247,6 +270,55 @@ if ($_SESSION['admin'] == 'true') {
         </tbody>
       </table>
       <a href='insertBooking.php'>Shto Rezervim</a>
+    </div>
+    ";
+
+  // payments
+  echo "
+      
+  <div class=\"table-responsive\" id='paymentDiv'  style='display:none;'>
+  <h2>Payments</h2>
+    <table class=\"table table-striped table-sm\">
+      <thead>
+        <tr>
+          <th scope=\"col\">Id</th>
+          <th scope=\"col\">Booking id</th>
+          <th scope=\"col\">Shuma</th>
+          <th scope=\"col\">Card Number</th>
+          <th scope=\"col\">Expiry Month</th>
+          <th scope=\"col\">Expiry Year</th>
+          <th scope=\"col\">CVC</th>
+          <th scope=\"col\">Placeholder</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>";
+
+  include_once 'repository/paymentRepository.php';
+
+  $paymentRepository = new PaymentRepository();
+  $payments = $paymentRepository->getAllPayments();
+
+  foreach ($payments as $payment) {
+      echo "
+          <tr>
+            <td>{$payment['id']}</td>
+            <td>{$payment['booking_id']}</td>
+            <td>{$payment['shuma']} €</td>
+            <td>{$payment['cardNumber']}</td>
+            <td>{$payment['cardExpiryMonth']}</td>
+            <td>{$payment['cardExpiryYear']}</td>
+            <td>{$payment['cardCVC']}</td>
+            <td>{$payment['cardPlaceholder']}</td>
+            <td><a href='editPayment.php?id=$payment[id]'>Edit</a> </td>
+            <td><a href='deletePayment.php?id=$payment[id]'>Delete</a></td>
+          </tr>";
+  }
+
+  echo "
+        </tbody>
+      </table>
     </div>
     ";
 
@@ -391,6 +463,8 @@ if ($_SESSION['admin'] == 'true') {
           <a href='inseerUser.php'>Shto User</a>
       </div>
       ";
+
+
 
 }
 ?>

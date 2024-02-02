@@ -68,7 +68,6 @@ class MovieRepository{
         $sql = "UPDATE movies SET name=?, pershkrimi=?, category=?, image=?, qmimi=? WHERE id=?";
         $statement = $conn->prepare($sql);
 
-        // Pass parameters in the correct order
         $statement->execute([$name, $pershkrimi, $category, $image, $qmimi, $id]);
 
         header("location:dashboard.php");

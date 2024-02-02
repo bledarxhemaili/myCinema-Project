@@ -1,47 +1,20 @@
 <?php 
 session_start(); 
-include_once 'repository/userRepository.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>myCinema</title>
     <link rel="shortcut icon" href="images/video1.png"/>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<?php include('header.php'); ?>
 
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                        <a href="./index.php"><img src="images/logo.png" alt="" class="logo"></a>
-                </div>           
-                <div class="col-lg-8" style="display: flex; justify-content: flex-end ; align-items: center;">
-                            <ul id="buttons">
-                                <li><a href="./index.php">Homepage</a></li>
-                                <li><a href="./signupforma.php">Sign Up</a></li>
-                                <li><a href="./login.php">Log In</a></li>
-                            </ul>     
-                </div>
-                <div class="col-lg-2" style="display: flex; justify-content: flex-end ; align-items: center;">
-                        <?php
-                            if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
-                                $image='<a href="./dashboard.php"><img src="images/user.png" style="margin-right: 20px;"/></a>';
-                                $image1='<a href="./logout.php"><img src="images/logout.png"/></a>';
-                                echo $image;
-                                echo $image1;
-                            }
-                        ?>
-
-                </div> 
-            </div>
-        </div>
-    </header>
 
 <div class="container" style="display: flex; justify-content: center; height: 600px; margin-top: 40px; max-width: 80%;">
    <div class="col-md-2  forma"><button type="button" onclick="displayPreviousImage()" class=" btn_prev_next">Previous</button></div>
@@ -96,7 +69,7 @@ include_once 'repository/userRepository.php';
         foreach ($movies as $movie) {
             echo "
                 <div class='col-xl-4'>
-                    <img src='images/{$movie['image']}' alt='' class='img'>
+                    <img src='images/{$movie['image']}' alt='Foto' class='img'>
                     <div class='views_date'>
                         <h6><a href='./details.php?id={$movie['id']}' style='color: white; text-decoration: none; font-size: 1.2rem;'>{$movie['name']}</a></h6>
                         <p class='category'>{$movie['category']}</p>
@@ -110,24 +83,6 @@ include_once 'repository/userRepository.php';
      ?>
 
 
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                            <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
-                    </div>
-                    <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
-                            <ul id="buttons">
-                                <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="./signupforma.html">Sign Up</a></li>
-                                <li><a href="./login.html">Log In</a></li>
-                            </ul>
-                    </div>
-                    <div class="col-lg-3" style="display: flex; align-items: center; justify-content: center;">
-                        <p style="margin: 0;">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
-                    </div>
-                  </div>
-              </div>
-          </footer>
+          <?php include('footer.php'); ?> 
 </body>
 </html>

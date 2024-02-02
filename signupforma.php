@@ -2,11 +2,10 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Anime Template">
-    <meta name="keywords" content="Anime, unica, creative, html">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>myCinema</title>
     <link rel="shortcut icon" href="images/video1.png" />
 
@@ -21,23 +20,8 @@
 </head>
 
 <body>
+<?php include('header.php'); ?>
 
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                        <a href="./index.php"><img src="images/logo.png" alt="" class="logo"></a>
-                </div>           
-                <div class="col-lg-10" style="display: flex; justify-content: flex-end ; align-items: center;">
-                            <ul id="buttons">
-                                <li><a href="./index.php">Homepage</a></li>
-                                <li><a href="./signupforma.php">Sign Up</a></li>
-                                <li><a href="./login.php">Log In</a></li>
-                            </ul>     
-                </div>
-            </div>
-        </div>
-    </header>
 
     <section>
         <div class="container" style="display: flex; justify-content: center; align-items: center; height: 87vh">
@@ -122,26 +106,7 @@
   document.getElementById('button').addEventListener('click', validateForm);
     </script>
 
-<footer class="footer">
-    <div class="container" >
-        <div class="row">
-            <div class="col-lg-3">
-                    <a href="./index.html"><img src="images/logo.png" alt="" class="logo"></a>
-            </div>
-            <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
-                    <ul id="buttons">
-                        <li><a href="./index.html">Homepage</a></li>
-                        <li><a href="./signupforma.html">Sign Up</a></li>
-                        <li><a href="./login.html">Log In</a></li>
-                    </ul>
-            </div>
-            <div class="col-lg-3" style="display: flex; align-items: center; justify-content: center;">
-                <p style="margin: 0;">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
-            </div>
-          </div>
-      </div>
-  </footer>
-
+    <?php include('footer.php'); ?>
 
 </body>
 

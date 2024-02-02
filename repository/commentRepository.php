@@ -27,8 +27,8 @@ class CommentRepository{
 
         $statement->execute([$movie_id, $user_id, $username, $review]);
 
-        header("Location: details.php?id=$movie_id");
-
+        echo "<script>window.location.href = 'details.php?id=$movie_id';</script>";
+        
     }
 
 

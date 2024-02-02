@@ -18,6 +18,27 @@
         #forma{
             margin-top: 10%;
         }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+            align-content: center;
+        }
+
+        .form-group label {
+            display: flex;
+            flex: 1;
+            margin: 0;
+            color: white;
+            align-items: center;
+            width: 100px;
+            
+        }
+
+        .form-group input {
+            flex: 2;
+        }
     </style>
 </head>
 <body>
@@ -32,13 +53,28 @@
             
                 <form method="POST" action="" id="forma">             
                     <h1>Forma per ndryshimin e komenteve ne databaz</h1>
-
-                    <input type="text" name="id" value="<?=$comment['id']?>" readonly> <br> <br>
-                    <input type="number" name="movie_id" value="<?=$comment['movie_id']?>" ><br><br>
-                    <input type="number" name="user_id" value="<?=$comment['user_id']?>" ><br><br>
-                    <input type="text" name="username" value="<?=$comment['username']?>" ><br><br>
-                    <input type="text" name="review" value="<?=$comment['review']?>"><br><br>
-
+                    <div class="form-group">
+                        <label for="id">ID: </label>
+                        <input type="text" name="id" value="<?=$comment['id']?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="movie_id">Movie id: </label>
+                        <input type="number" name="movie_id" value="<?=$comment['movie_id']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_id">User id: </label>
+                        <input type="number" name="user_id" value="<?=$comment['user_id']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        <input type="text" name="username" value="<?=$comment['username']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Review: </label>
+                        <input type="text" name="review" value="<?=$comment['review']?>">
+                    </div>
+                    
+                    <br>
                     <button type="submit" name="submit" class="watch-btn">Ruaj</button>
 
                 </form>

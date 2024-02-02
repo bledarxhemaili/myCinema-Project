@@ -15,8 +15,6 @@
 </head>
 <body>
 
-
-
     <div class="container" >
         <div class="row">
             <div class="col-lg-12 " style="display: flex; justify-content: center; align-items: center; align-content: center;">
@@ -35,7 +33,6 @@
         </div>
     </div>
 
-
-      
+    
 </body>
 </html>
