@@ -464,6 +464,44 @@ if ($_SESSION['admin'] == 'true') {
       </div>
       ";
 
+// contact
+
+echo "
+  
+<div class=\"table-responsive\" id='contactsDiv'  style='display:none;'>
+<h2>Contacts</h2>
+  <table class=\"table table-striped table-sm\">
+    <thead>
+      <tr>
+        <th scope=\"col\">Id</th>
+        <th scope=\"col\">Name</th>
+        <th scope=\"col\">Email</th>
+        <th scope=\"col\">Message</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>";
+include_once 'repository/contactRepository.php';
+
+$contactRepository = new ContactRepository();
+$contacts = $contactRepository->getAllContacts();
+
+foreach ($contacts as $contact) {
+  echo "
+      <tr>
+        <td>{$contact['id']}</td>
+        <td>{$contact['name']}</td>
+        <td>{$contact['email']}</td>
+        <td>{$contact['message']}</td>
+        <td><a href='deleteContact.php?id=$contact[id]'>Delete</a></td>
+      </tr>";
+}
+
+echo "
+    </tbody>
+  </table>
+</div>
+";
 
 
 }
