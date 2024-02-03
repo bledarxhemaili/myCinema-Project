@@ -1,6 +1,11 @@
 <?php
 
 	session_start();
+  if ($_SESSION['user_id'] === null || $_SESSION['username']=== null) {
+    header("Location: login.php");
+    exit();
+  }
+
 
  ?>
 
@@ -460,7 +465,7 @@ if ($_SESSION['admin'] == 'true') {
     echo "
           </tbody>
         </table>
-          <a href='inseerUser.php'>Shto User</a>
+          <a href='insertUser.php'>Shto User</a>
       </div>
       ";
 

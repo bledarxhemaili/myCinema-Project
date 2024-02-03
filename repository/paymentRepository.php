@@ -60,7 +60,7 @@ class PaymentRepository{
     function updatePayment($id, $booking_id, $shuma, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVC, $cardPlaceholder){
          $conn = $this->connection;
 
-         $sql = "UPDATE payment SET booking_id=?, shuma=?, cardNumber=?, cardExpiryMonth=?, cardExpiryYear=?, cardCVC=?, cardPlaceholde=? WHERE id=?";
+         $sql = "UPDATE payment SET booking_id=?, shuma=?, cardNumber=?, cardExpiryMonth=?, cardExpiryYear=?, cardCVC=?, cardPlaceholder=? WHERE id=?";
 
          $statement = $conn->prepare($sql);
 

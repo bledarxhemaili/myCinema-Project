@@ -34,42 +34,35 @@ class UserRepository{
     }
 
     function loginUser($username, $password){
-
         $conn = $this->connection;
-        
-        $sql = "SELECT id, username, password, admin FROM login WHERE username =:username";
+    
+        $sql = "SELECT id, username, password, admin FROM login WHERE username = :username";
         $prep = $conn->prepare($sql);
         $prep->bindParam(":username", $username);
         $prep->execute();
         $data = $prep->fetch();
-
-
-            if($data == false){
-                echo "<script>alert('Username incorrect!')</script>";
-                 echo "<script>location.href='login.php'</script>";
-            }else if(password_verify($password, $data['password'])){
-                session_start();
-                $_SESSION['user_id'] = $data['id'];
-                $_SESSION['username'] = $data['username'];
-                $_SESSION['admin'] = $data['admin'];
-
-                setcookie('username', $data['username'], time() + 86400, '/');
-                setcookie('user_id', $data['id'], time() + 86400, '/');
-                
-                header("Location: index.php");
-            }else{
-                echo "<script>alert('Password incorrect!')</script>";
-                 echo "<script>location.href='login.php'</script>";
-            }
-
-        if ($username == $username && $password == $password) { 
-        $_SESSION['authenticated'] = true;
-        header("Location: index.php");
+    
+        if ($data == false) {
+            echo "<script>alert('Username incorrect!')</script>";
+            echo "<script>location.href='login.php'</script>";
+        } elseif (password_verify($password, $data['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $data['id'];
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['admin'] = $data['admin'];
+            $_SESSION['authenticated'] = true; // Set authentication flag
+    
+            setcookie('username', $data['username'], time() + 86400, '/');
+            setcookie('user_id', $data['id'], time() + 86400, '/');
+            
+            header("Location: index.php");
+            exit(); // Add this line to stop further script execution
+        } else {
+            echo "<script>alert('Password incorrect!')</script>";
+            echo "<script>location.href='login.php'</script>";
         }
-
-
+    
         return $data;
-
     }
 
     function getAllUsers(){

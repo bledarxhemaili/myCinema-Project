@@ -102,15 +102,15 @@
     <?php 
         if (isset($_POST['submit'])) {
             $id = $_POST['id'];
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $number = $_POST['number'];
-            $password = $_POST['password'];
-            $admin = $_POST['admin'];
+            $booking_id = $_POST['booking_id'];
+            $shuma = $_POST['shuma'];
+            $cardNumber = $_POST['cardNumber'];
+            $cardExpiryMonth = $_POST['cardExpiryMonth'];
+            $cardExpiryYear = $_POST['cardExpiryYear'];
+            $cardCVC = $_POST['cardCVC'];
+            $cardPlaceholder = $_POST['cardPlaceholder'];
 
-            $userRepository->updateUser($id, $firstname, $lastname, $username, $email, $number, $password, $admin);
+            $paymentRepository->updatePayment($id, $booking_id, $shuma, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVC, $cardPlaceholder);
         }
     ?>
     

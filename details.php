@@ -1,6 +1,10 @@
 <?php
 
     session_start();
+    if ($_SESSION['user_id'] === null || $_SESSION['username']=== null) {
+        header("Location: login.php");
+        exit();
+    }
 
     if (isset($_GET['id'])) {
         $movie_id = $_GET['id'];
@@ -9,6 +13,7 @@
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
     } 
+    
     
     include_once 'repository/movieRepository.php';
     include_once 'repository/commentRepository.php';

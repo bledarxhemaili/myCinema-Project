@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
     <div class="login-container">
         <h2>Log In</h2>
         <p style="color: black;">Welcome to the official myCinema website.</p>
-        <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="login">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="login" onsubmit="return validateForm();">
             <div class="form-group">
                 <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
@@ -37,7 +36,7 @@
 
 </div>
      <script>
-        function validateForm() {
+    function validateForm() {
      var username = document.getElementById("username").value;
      var password = document.getElementById("password").value;
 
@@ -47,14 +46,14 @@
         alert("Please enter a valid username");
         return false;
      }
-     var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+     var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+{}|:"<>?`~-=\\[\];',./]{8,}$/;
      if(!passwordRegex.test(password)){
         alert("Please enter a valid password");
         return false;
      }
   return true;
 }
-  document.getElementById('button').addEventListener('click', validateForm);
+  document.getElementById('button').addEventListener('click', validateForm); 
     </script>
 
 

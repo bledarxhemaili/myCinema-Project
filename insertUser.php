@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-12 " style="display: flex; justify-content: center; align-items: center; align-content: center;">           
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']?>" id="forma">             
-                    <h1>Forma per shtimin e komenteve ne databaz</h1>
+                    <h1>Forma per shtimin e perdoruesve ne databaz</h1>
 
                     <input type="text" name="firstname" placeholder="First name"><br><br>
                     <input type="text" name="lastname" placeholder="Last name" ><br><br>

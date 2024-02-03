@@ -2,6 +2,11 @@
 
       session_start();
 
+       if ($_SESSION['user_id'] === null || $_SESSION['username']=== null) {
+        header("Location: login.php");
+        exit();
+    }
+    
 
       $movie_id = $_GET['id'];
 
@@ -67,15 +72,15 @@ foreach ($movies as $movie) {
            <div class="form-label">
              <select class="b1"  name="date" value="Date">
           <option value="" disabled selected hidden>Date</option>
-           <option>01.12.2023</option>
-           <option>02.12.2023</option>
-           <option>03.12.2023</option>
-           <option>04.12.2023</option>
-           <option>05.12.2021</option>
-           <option>06.12.2023</option>
-           <option>07.12.2023</option>
-           <option>08.12.2023</option>
-           <option>09.12.2023</option>
+           <option>01.02.2024</option>
+           <option>03.02.2024</option>
+           <option>05.02.2024</option>
+           <option>07.02.2024</option>
+           <option>09.02.2024</option>
+           <option>11.02.2024</option>
+           <option>13.02.2024</option>
+           <option>15.02.2024</option>
+           <option>17.02.2024</option>
 
          </select>
          </div>
@@ -85,16 +90,16 @@ foreach ($movies as $movie) {
         <div class="form-label">
           <select class="b1"  name="time" placeholder="Time">
             <option value="" disabled selected hidden>Time</option>
-        <option>10:10</option>
-        <option>11:15</option>
-        <option>12:20</option>
-        <option>13:25</option>
+        <option>09:30</option>
+        <option>10:15</option>
+        <option>11:45</option>
+        <option>13:00</option>
         <option>14:30</option>
-        <option>15:35</option>
-        <option>16:40</option>
+        <option>15:45</option>
+        <option>16:30</option>
         <option>17:45</option>
-        <option>18:50</option>
-        <option>19:55</option>
+        <option>19:00</option>
+        <option>20:30</option>
 
       </select>
       </div>

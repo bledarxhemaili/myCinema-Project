@@ -29,7 +29,7 @@
                 <div class="login-container" style="width: 350px;">
                     <h2>Sign Up</h2>
                     <p style="color: black;">Welcome to the official myCinema website.</p>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateForm();">
                     <div class="form-group">
                         <input type="text" name="firstname" id="firstname" placeholder="First name" required>
                     </div>
@@ -88,16 +88,16 @@
         alert("Please enter a valid email");
         return false;
      }
-     var phoneNumberRegex = /^(\+\d{1,2}\s?)?(\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$/;
-     if(!phoneNumberRegex.test(number)){
-        alert("Please enter a valid phone number");
+     var phoneNumberRegex = /^(?:\+\d{1,2}\s?)?(?:\d{3})(?:\d{6})$/;
+    if (!phoneNumberRegex.test(phoneNumber)) {
+        alert("Please enter a valid phone number (like: 044111222)");
         return false;
-     }
-     var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-     if(!passwordRegex.test(password)){
-        alert("Please enter a valid password");
+    }
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+{}|:"<>?`~-=\\[\];',./]{8,}$/;
+    if (!passwordRegex.test(password)) {
+        alert("Please enter a valid password. \nIt must contain at least: \nAt least one lowercase letter, \nAt least one uppercase letter, \nAt least one digit, \nMust be at least 8 characters long.");
         return false;
-     }
+    }
 
 
   return true;
